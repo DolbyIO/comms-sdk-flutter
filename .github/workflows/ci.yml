@@ -27,6 +27,8 @@ jobs:
         persist-credentials: false
     - name: Checkout submodules
       run: git submodule update --init --recursive
+    - name: Create empty token file
+      run: echo 'const tokenResponse = "";' > test_app/integration_tests/end_to_end/token.dart
     - name: Set up Java 🔧
       uses: actions/setup-java@v3
       with:
@@ -64,6 +66,8 @@ jobs:
         persist-credentials: false
     - name: Checkout submodules
       run: git submodule update --init --recursive
+    - name: Create empty token file
+      run: echo 'const tokenResponse = "";' > test_app/integration_tests/end_to_end/token.dart
     - name: Set up Flutter version 🔧
       uses: ./.github/actions/flutter-action
       with:
@@ -79,7 +83,7 @@ jobs:
         ./scripts/score_analyzer.sh
     - name: Run unmocked integration tests
       run: |
-        ./scripts/run-unmocked-integration-tests-ios.rb
+        ./scripts/run-end-to-end-tests-ios.rb
     - name: Run mocked integration tests
       run: |
         ./scripts/run-mocked-integration-tests-ios.rb

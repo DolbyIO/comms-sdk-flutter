@@ -2,9 +2,27 @@
 
 require 'json'
 require 'open3'
+require 'uri'
+require 'net/http'
+require 'openssl'
+require "base64"
 
-File.open('test_app/integration_tests/end_to_end/token.dart', "w") { |f| f.write "const tokenString = \"#{ARGV[0]}\";" }
+url = URI("https://session.voxeet.com/v1/oauth2/token")
 
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+api_key = ARGV[0]
+api_secret = ARGV[1]
+encoded_credentials = Base64.strict_encode64("#{api_key}:#{api_secret}")
+request = Net::HTTP::Post.new(url)
+request["accept"] = 'application/json'
+request["Cache-Control"] = 'no-cache'
+request["Content-Type"] = 'application/x-www-form-urlencoded'
+request["authorization"] = "Basic #{encoded_credentials}"
+request.body = "grant_type=client_credentials"
+response = http.request(request)    
+
+File.open('test_app/integration_tests/end_to_end/token.dart', "w") { |f| f.write "const tokenResponse = #{response.read_body};" }
 
 preferred_ios_simulators = [
     "iPhone 14 Pro",
@@ -58,6 +76,17 @@ begin
             end
         end
         puts("Simulator #{simulator.udid} booted")
+    end
+
+    puts("Running Native UI app ....")
+    cmd = "xcodebuild test -project integration_tests/flutter-sdk-native-ui/flutter-sdk-native-ui.xcodeproj -scheme flutter-sdk-native-ui -destination 'platform=iOS Simulator,name=#{simulator.name}'"
+    Open3.popen2(cmd, chdir: "test_app") do |stdin, stdout, wait_thr|
+        while line = stdout.gets
+            puts line
+        end
+        if wait_thr.value != 0
+            raise "Runnning tests has finished with exit code: #{wait_thr.value}"
+        end
     end
 
     puts("Runing tests ...")

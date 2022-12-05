@@ -8,8 +8,10 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized(); // NEW
 
   final dolbyioCommsSdkFlutterPlugin = DolbyioCommsSdk.instance;
+  var tokenString;
 
   setUp(() async {
+    tokenString = tokenResponse['access_token'];
   });
 
   testWidgets('VoxeetSDK: initiliseToken', (tester) async {
@@ -18,8 +20,15 @@ void main() {
   });
 
   testWidgets('VoxeetSDK: openSession', (tester) async {
-    var participantInfo = ParticipantInfo("bin", "avatarUrl", "123");
+    var participantInfo = ParticipantInfo("participant_1", "avatarUrl", "123");
     await dolbyioCommsSdkFlutterPlugin.session.open(participantInfo);
+
+    expect(participantInfo.name, "participant_1");
+
+    participantInfo = ParticipantInfo("participant_2", "avatarUrl", "345");
+    await dolbyioCommsSdkFlutterPlugin.session.open(participantInfo);
+
+    expect(participantInfo.name, "participant_2");
   });
 
   testWidgets('VoxeetSDK: createJoin', (tester) async {
@@ -31,23 +40,34 @@ void main() {
     parameters.videoCodec = Codec.h264;
     var options = ConferenceCreateOption(
         "test", parameters, 123, SpatialAudioStyle.individual);
+
     var conference =
         await dolbyioCommsSdkFlutterPlugin.conference.create(options);
+
+    expect(conference.status.name, "created");
 
     var joinOptions = ConferenceJoinOptions();
     joinOptions.constraints = ConferenceConstraints(true, true);
     joinOptions.maxVideoForwarding = 4;
     joinOptions.spatialAudio = true;
     joinOptions.mixing = ConferenceMixingOptions(true);
-    await dolbyioCommsSdkFlutterPlugin.conference
-        .join(conference, joinOptions);
+    await dolbyioCommsSdkFlutterPlugin.conference.join(conference, joinOptions);
 
-    // var leaveOptions = ConferenceLeaveOptions(true);
-    // await dolbyioCommsSdkFlutterPlugin.conference
-    //     .leave(options: leaveOptions);
-  });
+    var participant = await dolbyioCommsSdkFlutterPlugin.conference.getParticipants(conference);
 
-  testWidgets('VoxeetSDK: getLocalStats', (tester) async {
-    await dolbyioCommsSdkFlutterPlugin.conference.getLocalStats();
+    expect(participant[0].info?.name, "participant_1");
+
+    await dolbyioCommsSdkFlutterPlugin.conference.mute(participant[0], true);
+
+    var isMuted = await dolbyioCommsSdkFlutterPlugin.conference.isMuted();
+
+    expect(isMuted, true);
+
+    await dolbyioCommsSdkFlutterPlugin.conference.setSpatialPosition(participant: participant[0], position: SpatialPosition(1, 1, 1));
+
+    await dolbyioCommsSdkFlutterPlugin.conference.setSpatialDirection(SpatialDirection(1, 1, 1));
+
+    var leaveOptions = ConferenceLeaveOptions(true);
+    await dolbyioCommsSdkFlutterPlugin.conference.leave(options: leaveOptions);
   });
 }
