@@ -81,12 +81,12 @@ jobs:
     - name: Run pana analyzer
       run: |
         ./scripts/score_analyzer.sh
-    - name: Run unmocked integration tests
-      run: |
-        ./scripts/run-end-to-end-tests-ios.rb
     - name: Run mocked integration tests
       run: |
         ./scripts/run-mocked-integration-tests-ios.rb
+    - name: Run unmocked integration tests
+      run: |
+        ./scripts/run-end-to-end-tests-ios.rb
     - name: Analyze
       run: |
         flutter analyze
