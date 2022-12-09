@@ -5,7 +5,7 @@ require 'open3'
 require 'uri'
 require 'net/http'
 require 'openssl'
-require "base64"
+require 'base64'
 
 url = URI("https://session.voxeet.com/v1/oauth2/token")
 
@@ -20,9 +20,11 @@ request["Cache-Control"] = 'no-cache'
 request["Content-Type"] = 'application/x-www-form-urlencoded'
 request["authorization"] = "Basic #{encoded_credentials}"
 request.body = "grant_type=client_credentials"
-response = http.request(request)    
+response = http.request(request)  
+jsonObject = response.read_body  
+parsed = JSON.parse(jsonObject)
 
-File.open('test_app/integration_tests/end_to_end/token.dart', "w") { |f| f.write "const tokenResponse = #{response.read_body};" }
+File.open('test_app/integration_tests/end_to_end/token.dart', "w") { |f| f.write "const token = \"#{parsed['access_token']}\";" }
 
 preferred_ios_simulators = [
     "iPhone 14 Pro",
@@ -79,7 +81,7 @@ begin
     end
 
     puts("Running Native UI app ....")
-    cmd = "xcodebuild test -project integration_tests/flutter-sdk-native-ui/flutter-sdk-native-ui.xcodeproj -scheme flutter-sdk-native-ui -destination 'platform=iOS Simulator,name=#{simulator.name}'"
+    cmd = "xcodebuild test -project integration_tests/flutter-sdk-native-ui/flutter-sdk-native-ui.xcodeproj -scheme flutter-sdk-native-ui -destination 'platform=iOS Simulator,id=#{simulator.udid}'"
     Open3.popen2(cmd, chdir: "test_app") do |stdin, stdout, wait_thr|
         while line = stdout.gets
             puts line

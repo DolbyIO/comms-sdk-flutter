@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		031A7564293F3E1800931266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A7563293F3E1800931266 /* AppDelegate.swift */; };
-		031A7566293F3E1800931266 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A7565293F3E1800931266 /* SceneDelegate.swift */; };
 		031A7568293F3E1800931266 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A7567293F3E1800931266 /* ViewController.swift */; };
 		031A756B293F3E1800931266 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 031A7569293F3E1800931266 /* Main.storyboard */; };
 		031A756D293F3E1A00931266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031A756C293F3E1A00931266 /* Assets.xcassets */; };
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		031A7560293F3E1800931266 /* flutter-sdk-native-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flutter-sdk-native-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		031A7563293F3E1800931266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		031A7565293F3E1800931266 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		031A7567293F3E1800931266 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		031A756A293F3E1800931266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		031A756C293F3E1A00931266 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				031A7563293F3E1800931266 /* AppDelegate.swift */,
-				031A7565293F3E1800931266 /* SceneDelegate.swift */,
 				031A7567293F3E1800931266 /* ViewController.swift */,
 				031A7569293F3E1800931266 /* Main.storyboard */,
 				031A756C293F3E1A00931266 /* Assets.xcassets */,
@@ -257,7 +254,6 @@
 			files = (
 				031A7568293F3E1800931266 /* ViewController.swift in Sources */,
 				031A7564293F3E1800931266 /* AppDelegate.swift in Sources */,
-				031A7566293F3E1800931266 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,20 +429,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B55NRA8BRW;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "flutter-sdk-native-ui/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Flutter SDK would like to access Microphone";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voxeet.dolbyioCommsSdkFlutterExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dolbyioCommsSdkFlutterExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -461,20 +459,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B55NRA8BRW;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "flutter-sdk-native-ui/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Flutter SDK would like to access Microphone";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voxeet.dolbyioCommsSdkFlutterExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dolbyioCommsSdkFlutterExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -528,10 +528,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B55NRA8BRW;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voxeet.dolbyioCommsSdkFlutterExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dolbyioCommsSdkFlutterExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -546,10 +546,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B55NRA8BRW;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.voxeet.dolbyioCommsSdkFlutterExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dolbyioCommsSdkFlutterExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
