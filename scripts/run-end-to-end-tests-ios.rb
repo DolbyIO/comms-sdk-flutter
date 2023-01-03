@@ -7,28 +7,10 @@ require 'net/http'
 require 'openssl'
 require 'base64'
 
+url = ARGV[0]
+api_key = ARGV[1]
 
-api_key = ARGV[0]
-
-puts("ARGV[0] ***** #{ARGV[0]}")
-#url = URI("https://api.dolby.io/test/token/session/#{api_key}")
-
-uri = URI.parse("https://api.dolby.io/test/token/session/#{api_key}")
-
-puts ("uri ***** #{uri}")
-
-# http = Net::HTTP.new(url.host, url.port)
-# http.use_ssl = true
-#api_secret = ARGV[1]
-#encoded_credentials = Base64.encode64("#{api_key}")
-# request = Net::HTTP::Post.new(url)
-# request["accept"] = 'application/json'
-# request["Cache-Control"] = 'no-cache'
-# request["Content-Type"] = 'application/x-www-form-urlencoded'
-# request["authorization"] = "Basic #{api_key}"
-# request.body = "grant_type=client_credentials"
-# response = http.request(url)
-
+uri = URI.parse("#{url}/#{api_key}")
 response = Net::HTTP.get_response(uri)
 jsonObject = response.read_body  
 parsed = JSON.parse(jsonObject)
