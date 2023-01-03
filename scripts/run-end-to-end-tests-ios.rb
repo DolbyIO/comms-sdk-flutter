@@ -7,23 +7,31 @@ require 'net/http'
 require 'openssl'
 require 'base64'
 
-url = URI("https://session.voxeet.com/v1/oauth2/token")
 
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
 api_key = ARGV[0]
-api_secret = ARGV[1]
-encoded_credentials = Base64.strict_encode64("#{api_key}:#{api_secret}")
-request = Net::HTTP::Post.new(url)
-request["accept"] = 'application/json'
-request["Cache-Control"] = 'no-cache'
-request["Content-Type"] = 'application/x-www-form-urlencoded'
-request["authorization"] = "Basic #{encoded_credentials}"
-request.body = "grant_type=client_credentials"
-response = http.request(request)  
+
+puts("ARGV[0] ***** #{ARGV[0]}")
+#url = URI("https://api.dolby.io/test/token/session/#{api_key}")
+
+uri = URI.parse("https://api.dolby.io/test/token/session/#{api_key}")
+
+puts ("uri ***** #{uri}")
+
+# http = Net::HTTP.new(url.host, url.port)
+# http.use_ssl = true
+#api_secret = ARGV[1]
+#encoded_credentials = Base64.encode64("#{api_key}")
+# request = Net::HTTP::Post.new(url)
+# request["accept"] = 'application/json'
+# request["Cache-Control"] = 'no-cache'
+# request["Content-Type"] = 'application/x-www-form-urlencoded'
+# request["authorization"] = "Basic #{api_key}"
+# request.body = "grant_type=client_credentials"
+# response = http.request(url)
+
+response = Net::HTTP.get_response(uri)
 jsonObject = response.read_body  
 parsed = JSON.parse(jsonObject)
-
 File.open('test_app/integration_tests/end_to_end/token.dart', "w") { |f| f.write "const token = \"#{parsed['access_token']}\";" }
 
 preferred_ios_simulators = [
