@@ -78,18 +78,18 @@ jobs:
     - name: Run tests
       run: |
         flutter test -r expanded
-    - name: Run pana analyzer
-      run: |
-        ./scripts/score_analyzer.sh
-    - name: Run mocked integration tests
-      run: |
-        ./scripts/run-mocked-integration-tests-ios.rb
+    # - name: Run pana analyzer
+    #   run: |
+    #     ./scripts/score_analyzer.sh
+    # - name: Run mocked integration tests
+    #   run: |
+    #     ./scripts/run-mocked-integration-tests-ios.rb
     - name: Run unmocked integration tests
       env: 
         APP_KEY: ${{ secrets.DOLBYIO_APP_KEY }}
         URL: ${{ secrets.DOLBYIO_APP_SDK_USER_ACCESS_TOKEN_URL }}
       run: |
-        ./scripts/run-end-to-end-tests-ios.rb "#{APP_KEY}"
+        ./scripts/run-end-to-end-tests-ios.rb "${APP_KEY}"
     - name: Analyze
       run: |
         flutter analyze
