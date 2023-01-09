@@ -48,3 +48,6 @@ app.*.map.json
 
 # For private use
 /lib/token_provider
+
+#token file
+/integration_tests/end_to_end/token.dart
